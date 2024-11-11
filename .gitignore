@@ -1619,7 +1619,6 @@ celerybeat-schedule
 
 # dotenv
 .env
-.json
 
 # virtualenv
 .venv/
