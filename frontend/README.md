@@ -10,6 +10,8 @@ If `pnpm` is missing, install it via `npm`:
 npm install -g pnpm
 ```
 
+Create a `.env` from `.env.example` and add your API keys
+
 Later, run the development server:
 
 ```bash
