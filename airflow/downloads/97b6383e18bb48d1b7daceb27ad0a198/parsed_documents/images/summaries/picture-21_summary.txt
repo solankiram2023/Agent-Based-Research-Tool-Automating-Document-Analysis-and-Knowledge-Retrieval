@@ -1,0 +1,1 @@
+Line graph showing market share trends from 1989 to 2021 for the United States, Europe, and the Rest of the World (ROW). The ROW starts high, declines, and then rises again. The United States and Europe show steady increases, with the US overtaking ROW around 2006. Europe shows the lowest initial share but increases steadily throughout the period.

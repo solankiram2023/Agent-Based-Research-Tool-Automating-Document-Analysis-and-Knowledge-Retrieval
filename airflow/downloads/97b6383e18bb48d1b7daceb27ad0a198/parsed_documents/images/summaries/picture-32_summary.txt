@@ -1,0 +1,1 @@
+Line chart comparing index AUM/active AUM ratios from 1989 to 2021 for US Large-Cap Blend, Global Large Cap, US Mid Cap, US Large-Cap Value, and US Large-Cap Growth. US Large-Cap Blend shows significant growth, surpassing others, especially after 2010.

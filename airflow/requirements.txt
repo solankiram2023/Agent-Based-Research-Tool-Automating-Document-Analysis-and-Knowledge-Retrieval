@@ -1,0 +1,15 @@
+boto3
+docling
+docling-core
+python-dotenv
+unstructured
+langchain
+markdown
+langchain-community
+langchain-openai
+langchain-pinecone
+pinecone-client
+Pillow
+requests
+uuid
+openai

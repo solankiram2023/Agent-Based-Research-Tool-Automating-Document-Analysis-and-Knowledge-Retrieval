@@ -1,0 +1,1 @@
+Line graph comparing Index AUM/Active AUM from 1989 to 2021 across India, South Korea, Real Estate, Technology, and Miscellaneous sectors. South Korea shows significant growth after 2016, peaking in 2021. The Real Estate sector also rises notably post-2010. Technology and Miscellaneous sectors increase steadily, while India's growth is moderate.

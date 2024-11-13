@@ -1,0 +1,1 @@
+Bar chart comparing asset allocation in active vs. index funds from 1999 to 2021. Categories: US Equity, Global Equity, Sector Equity, Emerging Markets, Regional Equity, Miscellaneous. Panel A (Active) shows a diverse allocation, while Panel B (Index) highlights dominance of Regional Equity. Key years: 1999, 2009, 2015, 2021.

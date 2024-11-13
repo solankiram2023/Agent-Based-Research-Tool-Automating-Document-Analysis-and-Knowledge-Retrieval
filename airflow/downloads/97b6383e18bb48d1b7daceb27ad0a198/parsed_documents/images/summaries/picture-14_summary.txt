@@ -1,0 +1,1 @@
+Bar chart showing percentage of active versus index investments from 1989 to 2021. The chart is predominantly dark blue, representing active investments, with a growing light blue section for index investments over time. A dashed line indicates the 50% mark across the chart.

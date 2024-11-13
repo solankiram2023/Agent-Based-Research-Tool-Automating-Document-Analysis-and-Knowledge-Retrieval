@@ -1,0 +1,1 @@
+Stacked bar chart showing asset allocation from 1989 to 2021, divided into equity (blue), fixed income (light blue), asset allocation (red), and all other (orange). Equity and fixed income dominate the chart, with variations over time.

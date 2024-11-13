@@ -1,0 +1,1 @@
+Bar chart comparing active and index investment allocations from 1999 to 2021. Panel A shows active investments with a mix of US Equity, Global Equity, Sector Equity, Emerging Markets, Regional Equity, and Miscellaneous. Panel B shows index investments predominantly in US Equity.

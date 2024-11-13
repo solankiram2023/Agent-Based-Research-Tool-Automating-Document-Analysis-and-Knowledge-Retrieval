@@ -1,0 +1,1 @@
+Bar chart showing the percentage of active equity vs. indexed equity from 1989 to 2021. Active equity, represented in dark blue, dominates the earlier years but gradually decreases over time, while indexed equity, shown in light blue, increases. A dashed orange line marks the 50% level.

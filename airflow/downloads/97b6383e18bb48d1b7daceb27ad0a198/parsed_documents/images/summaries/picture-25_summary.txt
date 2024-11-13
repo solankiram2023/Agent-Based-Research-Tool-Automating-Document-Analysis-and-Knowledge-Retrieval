@@ -1,0 +1,1 @@
+Bar chart showing the percentage of "Core Beta" and "Strategic Beta" from 1989 to 2021. The majority is consistently "Core Beta" (dark blue), with a gradual increase in "Strategic Beta" (light blue) over time. A dashed line marks the 50% level.

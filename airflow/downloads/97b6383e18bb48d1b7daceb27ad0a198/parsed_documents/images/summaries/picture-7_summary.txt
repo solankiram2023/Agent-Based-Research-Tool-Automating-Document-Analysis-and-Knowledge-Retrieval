@@ -1,0 +1,1 @@
+Pie chart showing investment allocation: US Equity 50%, Global Equity 21%, Regional Equity 16%, Sector Equity 8%, Emerging Markets 4%, Miscellaneous 1%.

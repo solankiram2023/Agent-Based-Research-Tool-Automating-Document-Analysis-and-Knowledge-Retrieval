@@ -1,0 +1,1 @@
+Bar chart comparing Index AUM to Active AUM across various regions. Japan and Canada have the highest ratios, while Malaysia is the lowest. The chart includes regions like Mexico, Greater China, South Korea, and others, with a dashed line indicating a ratio of 1.0.

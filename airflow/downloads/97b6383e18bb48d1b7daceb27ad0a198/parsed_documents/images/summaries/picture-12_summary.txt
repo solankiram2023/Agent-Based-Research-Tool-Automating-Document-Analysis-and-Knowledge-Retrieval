@@ -1,0 +1,1 @@
+Stacked bar chart showing the growth of Assets Under Management (AUM) from 1989 to 2021, divided by region: United States, Europe, and Rest of World (ROW). The chart illustrates a significant increase over time, with the United States having the largest share, followed by Europe and ROW.
