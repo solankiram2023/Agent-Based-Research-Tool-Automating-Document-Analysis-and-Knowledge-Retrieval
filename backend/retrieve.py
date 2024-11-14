@@ -63,8 +63,9 @@ async def retrieve_node(state: AgentState, config: RunnableConfig):
         for match in results["matches"]:
             resources.append({
                 "url"           : match["id"],
-                "title"         : match["metadata"].get("text", "No title")[:10],
-                "description"   : match["metadata"].get("text", "No description")
+                "title"         : match["metadata"].get("text", "No title")[:20],
+                "description"   : match["metadata"].get("text", "No description"),
+                "vector_resource" : True
             })
 
         # Add to state if relevant context was found
@@ -78,5 +79,10 @@ async def retrieve_node(state: AgentState, config: RunnableConfig):
     # Add to state if relevant context was found
     if resources:
         state["resources"].extend(resources)
+
+    state["messages"].append(ToolMessage(
+        tool_call_id = ai_message.tool_calls[0]["id"],
+        content      = f"Added the following resources: {resources}"
+    ))
 
     return state

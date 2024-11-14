@@ -109,13 +109,16 @@ async def chat_node(state: AgentState, config: RunnableConfig):
         # THIS BLOCK CONTROLS THE VISIBILITY OF RAG UPDATES TO FRONTEND
         # THIS BLOCK HAS ISSUES AS THE LLM IS IGNORING THE TOOL AND
         # CURATING THE CONTEXT ITSELF
-        if ai_message.tool_calls[0]["name"] == "RetrieveFromPinecone":
-            return {
-                "messages"  : [ai_message, ToolMessage(
-                    tool_call_id    = ai_message.tool_calls[0]["id"],
-                    content         ="Resources retrieved from Pinecone."
-                )]
-            }
+
+        # print(ai_message)
+        # if ai_message.tool_calls[0]["name"] == "RetrieveFromPinecone":
+        #     return {
+        #         "resources" : ai_message.tool_calls[0]["args"].get("resources", ""),
+        #         "messages"  : [ai_message, ToolMessage(
+        #             tool_call_id    = ai_message.tool_calls[0]["id"],
+        #             content         ="Resources retrieved from Pinecone."
+        #         )]
+        #     }
         
         if ai_message.tool_calls[0]["name"] == "WriteReport":
             report = ai_message.tool_calls[0]["args"].get("report", "")

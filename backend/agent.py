@@ -31,12 +31,9 @@ def route(state):
     if messages and isinstance(messages[-1], AIMessage):
         ai_message = cast(AIMessage, messages[-1])
 
-        # Attempt RAG search initially
-        # if not state["resources"]:
-        #     return "retrieve_node"
 
         if ai_message.tool_calls:
-            print("TOOL NAME: ", ai_message.tool_calls[0]["name"])
+            print("Calling tool: ", ai_message.tool_calls[0]["name"])
 
         if ai_message.tool_calls and ai_message.tool_calls[0]["name"] == "RetrieveFromPinecone":
             return "retrieve_node"
