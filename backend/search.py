@@ -30,9 +30,7 @@ def ExtractResources(resources: List[ResourceInput]):
 tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 async def search_node(state: AgentState, config: RunnableConfig):
-    """
-    The search node is responsible for searching the internet for resources.
-    """
+    """ The search node is responsible for searching the internet for resources. """
     ai_message = cast(AIMessage, state["messages"][-1])
 
     state["resources"] = state.get("resources", [])
@@ -41,8 +39,8 @@ async def search_node(state: AgentState, config: RunnableConfig):
 
     for query in queries:
         state["logs"].append({
-            "message": f"Search for {query}",
-            "done": False
+            "message"   : f"Search for {query}",
+            "done"      : False
         })
 
     await copilotkit_emit_state(config, state)
@@ -58,9 +56,9 @@ async def search_node(state: AgentState, config: RunnableConfig):
     config = copilotkit_customize_config(
         config,
         emit_intermediate_state=[{
-            "state_key": "resources",
-            "tool": "ExtractResources",
-            "tool_argument": "resources",
+            "state_key"     : "resources",
+            "tool"          : "ExtractResources",
+            "tool_argument" : "resources",
         }],
     )
 
@@ -76,14 +74,12 @@ async def search_node(state: AgentState, config: RunnableConfig):
         **ainvoke_kwargs
     ).ainvoke([
         SystemMessage(
-            content="""
-            You need to extract the 3-5 most relevant resources from the following search results.
-            """
+            content = """You need to extract the 3 most relevant resources from the following search results."""
         ),
         *state["messages"],
         ToolMessage(
-        tool_call_id=ai_message.tool_calls[0]["id"],
-        content=f"Performed search: {search_results}"
+        tool_call_id = ai_message.tool_calls[0]["id"],
+        content      = f"Performed search: {search_results}"
     )
     ], config)
 
@@ -96,8 +92,8 @@ async def search_node(state: AgentState, config: RunnableConfig):
     state["resources"].extend(resources)
 
     state["messages"].append(ToolMessage(
-        tool_call_id=ai_message.tool_calls[0]["id"],
-        content=f"Added the following resources: {resources}"
+        tool_call_id = ai_message.tool_calls[0]["id"],
+        content      = f"Added the following resources: {resources}"
     ))
 
     return state

@@ -2,6 +2,7 @@
 
 import os
 from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_openai import ChatOpenAI
 
 # Custom imports
 from state import AgentState
@@ -14,10 +15,13 @@ def get_model(state: AgentState) -> BaseChatModel:
     state_model = state.get("model")
     model = os.getenv("MODEL", state_model)
 
-    print(f"Using model: {model}")
+    # print(f"Using model: {model}")
+    # if model == "openai":
+    #     from langchain_openai import ChatOpenAI
+    #     return ChatOpenAI(temperature=0, model="gpt-4o-mini")
+    # raise ValueError("Invalid model specified")
 
-    if model == "openai":
-        from langchain_openai import ChatOpenAI
-        return ChatOpenAI(temperature=0, model="gpt-4o-mini")
-
-    raise ValueError("Invalid model specified")
+    return ChatOpenAI(
+        temperature = 0, 
+        model       = "gpt-4o"
+    )
