@@ -42,7 +42,7 @@ This project aims to address these challenges by creating an agent-based researc
 
 ## Architecture Diagram
 ### 1. Core Application Pipeline
-![Architecture Diagram]()
+![Architecture Diagram](https://github.com/BigDataIA-Fall2024-TeamB6/Assignment4/blob/main/core_application_pipeline.png)
 
 
 
