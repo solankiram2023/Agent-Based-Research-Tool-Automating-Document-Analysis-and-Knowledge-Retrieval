@@ -1,0 +1,30 @@
+services:
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend  # Directory containing the frontend Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Map port 3000 on the host to port 3000 in the container
+    environment:
+      - NODE_ENV=production  # Set the Node.js environment to production
+    depends_on:
+      - fastapi  # Ensure FastAPI starts before the frontend
+      - backend  # Ensure the backend starts before the frontend
+    networks:
+      - app_network
+
+  # Backend service
+  backend:
+    build:
+      context: ./backend  # Directory containing the backend Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Map port 8500 on the host to port 8000 in the container
+    networks:
+      - app_network
+
+networks:
+  # Define a shared network for all services
+  app_network:
+    driver: bridge  # Use a bridge network for inter-service communication
