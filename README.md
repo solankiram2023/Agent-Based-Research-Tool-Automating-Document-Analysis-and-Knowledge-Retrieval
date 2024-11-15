@@ -28,9 +28,7 @@ Gomathy Selvamuthiah | 002410534 | 33% | Airflow Pipeline, Web Search Agent, Exp
 Ramy Solanki         | 002816593 | 33% | Llama Index Agent, Arxiv Agent, Dockerization
 
 ## Problem Statement
-This project aims to address these challenges by creating an agent-based research tool that leverages Retrieval-Augmented Generation (RAG) and multi-agent systems to enable users to interact seamlessly with document content. By incorporating advanced technologies like Langraph and Pinecone, the application simplifies research processes and empowers users to derive accurate, context-aware insights.
-
-The application primarily focuses on:
+This project aims to address these challenges by creating an agent-based research tool that leverages Retrieval-Augmented Generation (RAG) and multi-agent systems to enable users to interact seamlessly with document content. By incorporating advanced technologies like Langraph and Pinecone, the application simplifies research processes and empowers users to derive accurate, context-aware insights. The application primarily focuses on:
 
 1. Content Parsing and Vector Storage: Parse document contents, including text, tables, images, and graphs, using Docling and store vectorized embeddings in Pinecone for scalable similarity search.
 2. Automated Workflow with Airflow: Automate document parsing, embedding generation, and vector storage through a robust Airflow pipeline.
@@ -54,91 +52,31 @@ The application primarily focuses on:
 
 
 ## Project Goals
+
 ### Airflow Pipeline
-#### 1. Objective
-- Streamlined the process of parsing and extracting contents from documents, including text, tables, images, and graphs.
-- Automated the document ingestion process by integrating Docling for parsing and Pinecone for storing vectorized embeddings of document contents.
+1. Streamlined the process of parsing and extracting contents from documents, including text, tables, images, and graphs using Docling
+2. Stored the parsed document vectors in Pinecone by generating OpenAI vector embeddings of document contents
+3. Automated the data ingestion process and vector storage with Airflow
 
-#### 2. Tools
-- Extraction of data from publications website - BeautifulSoup
-- Database - Snowflake Database
-- File storage - Amazon S3 (Simple Storage Service)
-- Data Automation - Airflow
-- 
-#### 3. Output
-- Extracted and structured document from S3 contents are stored as embeddings in Pinecone for efficient retrieval.
-- Extracted textual data which are the details of the publication like title, brief summary, cover image url, pdf url are stored into table publications_info. Users information is being recorded in users table. All the responses to user queries are recorded in research_notes table. All the tables are stored in Snowflake Database
-
-### Agent-Based Research System
-#### 1. Objective
-Create a multi-agent system using Langraph to enhance document-based research and interactive query resolution.
-Implement various agents, including:
+### Research Agent
+1. Create a multi-agent system using Langraph to enhance document-based research and interactive query resolution.
+2. Implemented multi-agent workflow with various agents, including:
 - Document Selection Agent: Enable users to select and explore only processed documents.
 - Arxiv Agent: Retrieve related academic research papers.
 - Web Search Agent: Fetch supplementary data from the internet for broader context.
 - RAG (Retrieval-Augmented Generation) Agent: Enable Q/A functionality by combining Pinecone-stored embeddings and LLM capabilities.
-
-#### 2. Tools
-- Vector Storage: Pinecone for similarity search.
-- Agents: Langraph for implementing multi-agent research workflows.
 - LLM Integration: OpenAI API for generating context-aware responses to queries.
 
-#### 3. Output
-- Users can select documents, ask questions, and retrieve contextual answers with relevant text, tables, images, and graphs.
-- Multi-agent capabilities enable comprehensive research with data from documents, Arxiv, and online searches.
-- Responses are stored alongside user queries in a database for future reference and research continuity.
-
 ### FastAPI
-#### 1. Objective
-- Act as the backend service to integrate Pinecone, Langraph agents, and the user interface.
-- Provide endpoints for document exploration, querying, and research interaction.
-- Implement secure user authentication and data management protocols.
-
-#### 2. Tools
-- `fastapi[standard]` for building a standard FastAPI application *
-- `python-multipart` for installing additional dependencies for the FastAPI application
-- `snowflake-connector-python` for interacting with the Snowflake database
-- `PyJWT` for authenticating and authorizing users with JSON Web Tokens (JWT)
-- `openai` for prompting OpenAI's GPT-4o model to get LLM Response
-- `tiktoken` for disintegrating prompts into tokens of known sizes
-- `PyPDF2` for extracting text from the pdf files
-- `langchain` for RAG implementation
-- `unstructured[all-docs]` for text and image extraction from PDFs
-- `cleanlab-studio` for generating trustworthy score
-
-#### 3. Output
-FastAPI provides a number of endpoints for interacting with the service:
-- `GET` - `/health` - To check if the FastAPI application is setup and running
-- `POST` - `/register` - To sign up new users to the service
-- `POST` - `/login` - To sign in existing users
-- `GET` - `/exploredocs` - *Protected* - To fetch 'x' number of documents from the database
-- `GET` - `/load_docs/{document_id}` - *Protected* - To load publications information like title, brief summary, cover image url from the database
-- `GET` - `/summary/{document_id}` - *Protected* - To generate on the fly summary of the document using NVIDIA services
-- `POST` - `/chatbot/{document_id}` - *Protected* - Q/A interface for user to interact with the selected document
-
-FastAPI ensures that every response is returned in a consistent JSON format with HTTP status, type (data type of the response content) message (response content), and additional fields if needed
-
+1. Acts as the backend service to integrate Pinecone, Langraph agents, and the user interface.
+2. Provide endpoints for document exploration, querying, and research interaction.
 
 ### Coagents
-#### 1. Objective
-- Provide a user-friendly interface for document exploration, querying, and interactive research sessions.
-- Allow users to ask detailed questions, generate summaries, and interact with selected documents.
-
-#### 2. Tools
-- Coagents (web application framework), Requests (API calls for data retrieval)
-
-#### 3. Output
-- Interactive Q/A functionality enables users to query documents and retrieve structured answers.
-- Generated reports containing user queries, responses, images, and graphs are exportable in PDF and Codelabs formats.
-- A seamless user experience that integrates multiple agents and backend functionalities.
-
-### Deployment
-- Containerization of FastAPI and Streamlit applications using Docker
-- Deployment to a public cloud platform using Docker Compose
-- Ensuring public accessibility of the deployed applications - coagents and FastAPI
-- Providing clear instructions for users to interact with the RAG application and explore its functionalities
-- The FastAPI and Streamlit are containerized using Docker, orchestrated through Docker compose, and the Docker images are pushed to Docker Hub. For deploying the Docker containers, we use an Amazon Web Services (AWS) EC2 instance within the t3-medium tier
-
+1. Provide a user-friendly interface for document exploration, querying, and interactive research sessions.
+2. Allow users to ask detailed questions, generate reports, and interact with selected documents with multi-agent workflow.
+3. Generated reports containing user queries, responses, images, and graphs are exportable in PDF and Codelabs formats.
+4. A seamless user experience that integrates multiple agents and backend functionalities.
+ce that integrates multiple agents and backend functionalities.
 
 ## Data Source
 1. CFA Institute Research Foundation Publications: https://rpc.cfainstitute.org/en/research-foundation/publications#sort=%40officialz32xdate%20descending&f:SeriesContent=%5BResearch%20Foundation%5D
