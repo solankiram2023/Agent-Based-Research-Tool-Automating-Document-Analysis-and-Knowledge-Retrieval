@@ -14,6 +14,7 @@ import { AddResourceDialog } from "./AddResourceDialog";
 import { Resources } from "./Resources";
 import { AgentState, Resource } from "@/lib/types";
 import { useModelSelectorContext } from "@/lib/model-selector-provider";
+import { useEffect } from "react";
 
 export function ResearchCanvas() {
   const { model, agent } = useModelSelectorContext();
@@ -127,9 +128,94 @@ export function ResearchCanvas() {
     }
   };
 
+  const handleExportPDF = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/exportPDF", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ report: state.report }), // Send the report data if needed
+      });
+  
+      if (response.ok) {
+        const blob = await response.blob(); 
+        const url = window.URL.createObjectURL(blob); 
+        const link = document.createElement("a"); 
+        link.href = url;
+        link.download = "output.pdf"; 
+        link.click(); 
+        window.URL.revokeObjectURL(url); 
+      } else {
+        console.log("Failed to export PDF");
+      }
+    } catch (error) {
+      console.error("Error exporting PDF:", error);
+    }
+  };
+
+  const documents = [
+    { id: "68db7e4f057f494fb5b939ba258cefcd", name: "Revisiting-the-Equity-Risk-Premium" },
+    { id: "97b6383e18bb48d1b7daceb27ad0a198", name: "beyond-active-and-passive" },
+    { id: "52af53cc2f5e42558253aa572a55b78a", name: "risk_compilation_2018" },
+  ];
+
+  const [selectedDocument, setSelectedDocument] = useState<{ id: string, name: string }>({ id: "", name: "" });
+
+  useEffect(() => {
+    if (selectedDocument.id) {
+      // Send both the document ID and name via POST request to the specified endpoint
+      const sendDocumentData = async () => {
+        try {
+          const response = await fetch("http://localhost:8000/sourcedocument", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              documentId: selectedDocument.id,
+              documentName: selectedDocument.name,
+            }),
+          });
+
+          if (response.ok) {
+            console.log(`Document ID ${selectedDocument.id} and Name ${selectedDocument.name} sent successfully.`);
+          } else {
+            console.log("Failed to send document data.");
+          }
+        } catch (error) {
+          console.error("Error sending document data:", error);
+        }
+      };
+
+      sendDocumentData();
+    }
+  }, [selectedDocument]);
+
   return (
     <div className="container w-full h-full p-10 bg-slate-50 overflow-auto">
       <div className="space-y-8">
+        <div>
+          <h2 className="text-lg font-medium mb-3 text-primary">Select a Source Document</h2>
+          <select
+            value={selectedDocument.id}
+            onChange={(e) => {
+              const selectedDoc = documents.find(doc => doc.id === e.target.value);
+              if (selectedDoc) {
+                setSelectedDocument({ id: selectedDoc.id, name: selectedDoc.name });
+              }
+            }}
+            className="bg-background px-6 py-3 border-2 rounded-lg text-md font-light focus-visible:ring-0 placeholder:text-slate-400 w-full"
+            aria-label="Select Document"
+          >
+            <option value="">Select a document</option>
+            {documents.map((document) => (
+              <option key={document.id} value={document.id}>
+                {document.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <div>
           <h2 className="text-lg font-medium mb-3 text-primary">
             What do you want to research about?
@@ -189,8 +275,27 @@ export function ResearchCanvas() {
             rows={10}
             aria-label="Research draft"
             className="bg-background px-6 py-8 border-2 shadow-none rounded-lg text-md font-extralight focus-visible:ring-0 placeholder:text-slate-400"
-            style={{ minHeight: "200px" }}
+            style={{ minHeight: "500px" }}
           />
+        </div>
+
+        <div className="flex justify-end mt-8">
+          
+          {/* Export to PDF */}
+          <button
+            onClick={handleExportPDF}
+            className="px-6 py-2 bg-[#6766FC] text-white rounded text-sm font-bold mr-3"
+          >
+            Export as PDF
+          </button>
+
+          {/* Export to Codelabs */}
+          <button
+            onClick={handleExportPDF}
+            className="px-6 py-2 bg-[#6766FC] text-white rounded text-sm font-bold"
+          >
+            Export to Codelabs
+          </button>
         </div>
       </div>
     </div>
