@@ -226,7 +226,7 @@ Assignment3/
 1. **Clone the Repository**: Clone the repository onto your local machine and navigate to the directory within your terminal.
 
    ```bash
-   git clone https://github.com/BigDataIA-Fall2024-TeamB6/Assignment3
+   git clone https://github.com/BigDataIA-Fall2024-TeamB6/Assignment4
    ```
 
 2. **Install Docker**: Install docker and `docker compose` to run the application:
