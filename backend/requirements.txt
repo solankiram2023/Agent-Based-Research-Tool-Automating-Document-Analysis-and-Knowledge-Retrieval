@@ -90,3 +90,6 @@ langchain-google-genai==2.0.0
 tavily-python==0.5.0
 uvicorn==0.31.1
 langchain-pinecone
+snowflake-connector-python
+markdown
+weasyprint
