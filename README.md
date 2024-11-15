@@ -154,71 +154,65 @@ The OpenAI API is used to integrate large language models (LLMs) to generate con
 
 ## Project Structure
 ```
-Assignment3/
-├── airflow
-│   ├── Dockerfile
-│   ├── POC
-│   │   ├── MultiModalRAG.ipynb
-│   │   ├── Stage1.ipynb
-│   │   ├── Stage2.ipynb
-│   │   ├── Stage3.py
-│   │   └── stage1.csv
-│   ├── chromedriver
-│   │   ├── LICENSE.chromedriver
-│   │   ├── THIRD_PARTY_NOTICES.chromedriver
-│   │   └── chromedriver.exe
-│   ├── dags
-│   │   └── airflow_pipeline.py
-│   ├── docker-compose.yaml
-│   ├── rag_pipeline.py
-│   ├── requirements.txt
-│   ├── scraper.py
-│   ├── snowflakeDB.py
-│   ├── upload_to_S3.py
-│   └── webscrape.py
-├── diagram
-│   ├── AirflowPipeline.py
-│   ├── airflow_pipeline.png
-│   ├── core_app_architecture.py
-│   ├── core_application_pipeline.png
-│   └── images
-│       ├── Chroma.png
-│       ├── Download.png
-│       ├── InMemoryStore.png
-│       ├── Langchain.png
-│       ├── MultiVectorRetriever.png
-│       ├── Nvidia-Logo.png
-│       ├── Nvidia.png
-│       ├── OpenAI.png
-│       ├── PDF_documents.png
-│       ├── PNG.png
-│       ├── Question.png
-│       ├── Snowflake.png
-│       ├── Streamlit.png
-│       ├── Text.png
-│       ├── Unstructured.png
-│       ├── cfa-institute.png
-│       └── cleanlabs.png
-├── docker-compose.yml
-├── fastapi
-│   ├── Dockerfile
-│   ├── connectDB.py
-│   ├── main.py
-│   ├── models.py
-│   ├── requirements.txt
-│   ├── routers.py
-│   └── services.py
-└── streamlit
-    ├── Dockerfile
-    ├── app.py
-    ├── documentexplorer.py
-    ├── homepage.py
-    ├── loginpage.py
-    ├── overview.py
-    ├── qainterface.py
-    ├── registerpage.py
-    ├── requirements.txt
-    └── summary.py
+main/
+├── airflow/
+│   ├── dags/
+│   │   ├── airflow_pipeline.py
+│   │   └── __pycache__/
+│   ├── .gitignore
+│   ├── Dockerfile
+│   ├── pipeline.py
+│   └── requirements.txt
+├── backend/
+│   ├── .env.example
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── __init__.py
+│   ├── agent.py
+│   ├── arxiv.py
+│   ├── chat.py
+│   ├── delete.py
+│   ├── download.py
+│   ├── main.py
+│   ├── model.py
+│   ├── requirements.txt
+│   ├── retrieve.py
+│   ├── search.py
+│   ├── services.py
+│   └── state.py
+├── frontend/
+│   └── src/
+│       ├── app/
+│       │   ├── api/copilotkit/
+│       │   └── route.ts
+│       ├── fonts/
+│       ├── Main.tsx
+│       ├── globals.css
+│       ├── layout.tsx
+│       ├── page.tsx
+│       └── components/
+│           └── ui/
+│               ├── AddResourceDialog.tsx
+│               ├── EditResourceDialog.tsx
+│               ├── ModelSelector.tsx
+│               ├── Progress.tsx
+│               ├── ResearchCanvas.tsx
+│               └── Resources.tsx
+├── .dockerignore
+├── .env.example
+├── .eslintrc.json
+├── .gitignore
+├── Dockerfile
+├── README.md
+├── components.json
+├── next.config.mjs
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+├── tailwind.config.ts
+├── tsconfig.json
+└── README.md
+
 
 ```
 
