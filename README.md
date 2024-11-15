@@ -133,6 +133,24 @@ Snowflake is a cloud-based data warehousing and analytics service that supports 
 10. Pinecone Vector Database
 Pinecone is a cloud-native vector database used for storing embeddings of parsed document content, such as text chunks, tables, images, and graphs, in your research tool. It enables efficient similarity search by comparing user query embeddings with stored document embeddings using cosine similarity.
 
+11. LangGraph Multi-Agent Framework
+LangGraph is a powerful multi-agent framework designed to enhance document-based research and interactive query resolution by enabling seamless integration of multiple AI agents. This system facilitates intelligent and context-aware user interactions for complex research tasks, leveraging the capabilities of agents that can autonomously collaborate and perform tasks in parallel.
+
+12. Document Selection Agent
+This agent allows users to select and explore only processed documents, filtering out irrelevant or unprocessed content. This ensures users focus on the most relevant data for their research.
+
+13. Arxiv Agent
+This agent retrieves related academic research papers from ArXiv, enabling users to stay updated on the latest relevant literature and augment their research with additional references.
+
+14. Web Search Agent
+This agent fetches supplementary data from the web, providing a broader context for research tasks by retrieving external information that may not be available in the internal dataset.
+
+15. RAG (Retrieval-Augmented Generation) Agent
+The RAG agent combines embeddings from Pinecone-stored documents with the capabilities of language models to perform Q&A functionality. This agent enables efficient response generation by using document embeddings in combination with the knowledge available in the model.
+
+16. LLM Integration
+The OpenAI API is used to integrate large language models (LLMs) to generate context-aware responses to user queries. The LLM is able to interpret complex queries, summarize documents, and provide insightful answers based on the information retrieved by the various agents.
+
 
 ## Project Structure
 ```
@@ -246,5 +264,6 @@ Assignment3/
    docker-compose up -d
 
 4. In the browser, 
-   - visit `localhost:8501` to view the Streamlit application
+   - visit `localhost:3000` to view the CoAgent application
    - visit `localhost:8000/docs` to view the FastAPI endpoint docs
+   - visit `localhost:9000/` to view Codelabs document
