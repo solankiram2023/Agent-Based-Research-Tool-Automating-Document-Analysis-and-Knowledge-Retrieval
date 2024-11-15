@@ -1,4 +1,5 @@
 # Assignment4
+
 ## Agent-Based Research Tool: Automating Document Analysis and Knowledge Retrieval
 An interactive, agent-based research application built using FastAPI, Coagents, and Langraph to analyze and explore publications. The application parses document contents—including text, tables, images, and graphs—using Docling and stores structured data as vector embeddings in Pinecone for scalable similarity search. Users can interactively explore selected documents, query research insights, and retrieve responses leveraging multi-agent capabilities such as Arxiv search, web search, and Retrieval-Augmented Generation (RAG).
 
@@ -6,25 +7,25 @@ The tool enables robust Q/A functionality, real-time document selection, and mul
 
 
 ## Live Application Link
-- Streamlit application link: http://18.219.124.78:8501/
-- FastAPI: http://18.219.124.78:8000/health
+- CoAgent application link: http://18.219.124.78:3000/
+- FastAPI: http://18.219.124.78:8000/docs
+- CodeLabs Link: http://18.219.124.78:9000/
 
 ## Codelabs Link
-Codelabs documentation link: https://codelabs-preview.appspot.com/?file_id=1qFJkJYuKjS6lhUt_rgpfV4QB3Ic7YJtiIAI4vZ_7vW0#1
-## **Video of Submission**
-Demo Link in Codelabs Document 
+Codelabs documentation link: https://codelabs-preview.appspot.com/?file_id=1qFJkJYuKjS6lhUt_rgpfV4QB3Ic7YJtiIAI4vZ_7vW0#0
 
-
+## Demo Link
+Demo Link is attached in Codelabs Document
 
 ## Attestation and Team Contribution
 **WE ATTEST THAT WE HAVEN’T USED ANY OTHER STUDENTS’ WORK IN OUR ASSIGNMENT AND ABIDE BY THE POLICIES LISTED IN THE STUDENT HANDBOOK**
 
 Name | NUID | Contribution% | Work_Contributed
 --- | --- | --- | --- |
-Sandeep Suresh Kumar | 002841297 | 33% | 
-Deepthi Nasika       | 002474582 | 33% | 
-Gomathy Selvamuthiah | 002410534 | 33% | 
-Ramy Solanki         | 002816593 | 33% | 
+Sandeep Suresh Kumar | 002841297 | 33% | RAG Agent with Langgraph, Coagents, Deployment
+Deepthi Nasika       | 002474582 | 33% | Docling Parsing, Vector Storage, Export to Codelabs
+Gomathy Selvamuthiah | 002410534 | 33% | Airflow Pipeline, Web Search Agent, Export to PDF
+Ramy Solanki         | 002816593 | 33% | Llama Index Agent, Arxiv Agent, Dockerization
 
 ## Problem Statement
 This project aims to address these challenges by creating an agent-based research tool that leverages Retrieval-Augmented Generation (RAG) and multi-agent systems to enable users to interact seamlessly with document content. By incorporating advanced technologies like Langraph and Pinecone, the application simplifies research processes and empowers users to derive accurate, context-aware insights.
@@ -37,6 +38,7 @@ The application primarily focuses on:
 4. Interactive User Interface: Provide a user-friendly interface with Coagents or Streamlit for document selection, querying, and real-time interaction.
 5. Comprehensive Reports: Generate professional reports in PDF and Codelabs formats containing responses, images, and graphs relevant to user queries.
 6. Efficient Workflow Management: Validate and store research notes, enabling incremental indexing and efficient future searches.
+
 
 
 
