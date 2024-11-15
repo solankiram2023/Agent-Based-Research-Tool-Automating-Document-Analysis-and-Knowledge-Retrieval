@@ -94,6 +94,7 @@ async def chat_node(state: AgentState, config: RunnableConfig):
             If you finished writing the report, ask the user proactively for next steps, changes etc, make it engaging.
             To write the report, you should use the WriteReport tool. Never EVER respond with the report, only use the tool.
             Make sure the contents of the report are in well structured markdown format.
+            If images are available in resources (Base64), produce the images such that they can be rendered in markdown viewers
             If a research question is provided, YOU MUST NOT ASK FOR IT AGAIN.
             REMEMBER, EVERY TIME THE USER ASKS A NEW QUESTION, USE THE RetrieveFromPinecone TOOL BEFORE PROCEEDING TO USE THE SEARCH TOOL.
 
