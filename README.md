@@ -12,7 +12,7 @@ The tool enables robust Q/A functionality, real-time document selection, and mul
 ## Codelabs Link
 Codelabs documentation link: https://codelabs-preview.appspot.com/?file_id=1qFJkJYuKjS6lhUt_rgpfV4QB3Ic7YJtiIAI4vZ_7vW0#1
 ## **Video of Submission**
-Demo Link: 
+Demo Link in Codelabs Document 
 
 
 
