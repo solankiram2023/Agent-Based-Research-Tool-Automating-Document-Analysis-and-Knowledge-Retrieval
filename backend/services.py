@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from snowflake.connector import Error
 import markdown
 from weasyprint import HTML
+import subprocess
 
 # Load all environment variables
 load_dotenv()
@@ -177,3 +178,62 @@ def convert_markdown_to_pdf():
     ).write_pdf(output_filepath)
     
     print(f"PDF file created successfully at {output_filepath}")
+
+def export_and_serve_codelab():
+    input_file = os.path.join(os.getcwd(), "document.md")
+    
+    # Define metadata for the Codelab
+    metadata = """
+summary: How to Write a Codelab
+id: codelab-export-agent
+categories: Sample
+tags: medium
+status: Published 
+authors: Zarin
+Feedback Link: https://zarin.io
+
+"""
+
+    with open(input_file, 'r', encoding='utf-8') as f:
+        original_markdown = f.read()
+
+    # Combine metadata with the original markdown content
+    new_markdown_content = metadata + original_markdown
+
+    # Save the modified markdown to a temporary file
+    modified_input_file = os.path.join(os.getcwd(), "document_with_metadata.md")
+    with open(modified_input_file, 'w', encoding='utf-8') as f:
+        f.write(new_markdown_content)
+    
+    export_command = ["C:\\Users\\Pigeon\\go\\bin\\claat", "export", modified_input_file]
+    print(f"Running: {' '.join(export_command)}")
+    result = subprocess.run(export_command, capture_output=True, text=True)
+    
+    # Check if export was successful
+    if result.returncode == 0:
+        print("Export successful")
+        
+        output_dirs = [d for d in os.listdir(os.getcwd()) if os.path.isdir(d)]
+        
+
+        codelab_path = os.path.join(os.getcwd(), "codelab-export-agent")
+        # codelab_path = None
+        # for directory in output_dirs:
+        #     if directory != os.getcwd():
+        #         codelab_path = os.path.join(os.getcwd(), directory)
+        
+        # Check for the Codelab path
+        if codelab_path and os.path.exists(codelab_path):
+            os.chdir(codelab_path)
+            print(f"Serving Codelab from: {codelab_path}")
+            
+            # Run the claat serve command
+            serve_command = ["C:\\Users\\Pigeon\\go\\bin\\claat", "serve", "-addr", "localhost:9000"]
+            print(f"Running: {' '.join(serve_command)}")
+            subprocess.run(serve_command)
+        
+        else:
+            print("Error: Could not find the generated Codelab directory.")
+    else:
+        print("Export failed")
+        print(result.stderr)

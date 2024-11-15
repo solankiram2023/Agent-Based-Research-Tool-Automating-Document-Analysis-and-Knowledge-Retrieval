@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Custom imports
 from agent import graph
-from services import generate_markdown_for_document, convert_markdown_to_pdf
+from services import generate_markdown_for_document, convert_markdown_to_pdf, export_and_serve_codelab
 
 # Create a FastAPI app
 app = FastAPI()
@@ -110,6 +110,11 @@ async def exportToPDF(request: Request):
                 media_type = "application/json",
                 filename = "output.pdf"
             )
+        
+@app.post("/exportCodelabs")
+async def exportToCodelabs():
+    ''' Export markdown content to codelabs '''
+    export_and_serve_codelab()
 
 def main():
     """Run the uvicorn server."""
