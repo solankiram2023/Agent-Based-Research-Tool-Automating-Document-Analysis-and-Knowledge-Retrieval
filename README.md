@@ -86,18 +86,20 @@ ce that integrates multiple agents and backend functionalities.
 
 
 ## Technologies
-[![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-FFD43B?style=for-the-badge&logo=python&logoColor=white)](https://www.crummy.com/software/BeautifulSoup/)
-[![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)](https://www.selenium.dev/)
+[![Docling](https://img.shields.io/badge/Docling-00B5B8?style=for-the-badge&logo=docling&logoColor=white)](https://docling.com/)
+[![Pinecone](https://img.shields.io/badge/Pinecone-1A1A1A?style=for-the-badge&logo=pinecone&logoColor=white)](https://www.pinecone.io/)
+[![Airflow](https://img.shields.io/badge/Airflow-17B3A8?style=for-the-badge&logo=apacheairflow&logoColor=white)](https://airflow.apache.org/)
 [![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://www.python.org/)
 [![Amazon S3](https://img.shields.io/badge/Amazon%20S3-569A31?style=for-the-badge&logo=amazonaws&logoColor=white)](https://aws.amazon.com/s3/)
 [![Snowflake](https://img.shields.io/badge/Snowflake-29B1E5?style=for-the-badge&logo=snowflake&logoColor=white)](https://www.snowflake.com/)
-[![Airflow](https://img.shields.io/badge/Airflow-17B3A8?style=for-the-badge&logo=apacheairflow&logoColor=white)](https://airflow.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![LangChain](https://img.shields.io/badge/LangChain-5A67D8?style=for-the-badge)](https://www.langchain.com/)
-[![Cleanlab](https://img.shields.io/badge/Cleanlab-000000?style=for-the-badge&logo=cleanlab&logoColor=white)](https://cleanlab.ai/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-000000?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+[![Arxiv Agent](https://img.shields.io/badge/Arxiv%20Agent-FF3C00?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/)
+[![Web Search Agent](https://img.shields.io/badge/Web%20Search%20Agent-00A4E4?style=for-the-badge&logo=google&logoColor=white)](https://www.google.com/)
+[![LangGraph](https://img.shields.io/badge/LangGraph-4C9E00?style=for-the-badge&logo=python&logoColor=white)](https://www.langgraph.com/)
+[![CoAgent](https://img.shields.io/badge/CoAgent-007BFF?style=for-the-badge&logo=python&logoColor=white)](https://www.coagent.com/)
+[![CLaaT](https://img.shields.io/badge/CLaaT-FF5722?style=for-the-badge&logo=python&logoColor=white)](https://codelabs.developers.google.com/)
 
 ## Prerequisites
 Software Installations required for the project
