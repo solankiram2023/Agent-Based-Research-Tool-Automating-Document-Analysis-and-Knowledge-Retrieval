@@ -2,19 +2,31 @@
 
 import os
 from dotenv import load_dotenv 
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Request
 import uvicorn
 import logging
 from copilotkit.integrations.fastapi import add_fastapi_endpoint
 from copilotkit import CopilotKitSDK, LangGraphAgent
 from copilotkit.langchain import copilotkit_messages_to_langchain
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 # Custom imports
 from agent import graph
+from services import generate_markdown_for_document, convert_markdown_to_pdf
 
 # Create a FastAPI app
 app = FastAPI()
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins       = ["*"],
+    allow_credentials   = True,
+    allow_methods       = ["*"],
+    allow_headers       = ["*"],
+)
 
 # Load the environment variables
 load_dotenv()
@@ -33,7 +45,10 @@ if os.getenv('APP_ENV', "development") == "development":
 # Also log to a file
 file_handler = logging.FileHandler(os.getenv('FASTAPI_LOG', "fastapi_logs.log"))
 file_handler.setFormatter(formatter)
-logger.addHandler(file_handler) 
+logger.addHandler(file_handler)
+
+class MarkdownReport(BaseModel):
+    content: str
 
 # Register LangGraph agents with CopilotKit
 sdk = CopilotKitSDK(
@@ -69,6 +84,32 @@ def health() -> JSONResponse:
         'message'   : "You're viewing a page from FastAPI"
     })
 
+# Route for setting up Pinecone index as source
+@app.post("/sourcedocument")
+async def set_source(request: Request):
+    ''' Set the document ID of the source document '''
+
+    document_info = await request.json()
+    with open("sourcedocument", 'w', encoding='utf-8') as file:
+        file.write(str(document_info['documentId']))
+
+@app.post("/exportPDF")
+async def exportToPDF(request: Request):
+    ''' Export the report to PDF '''
+
+    output_filepath = os.path.join(os.getcwd(), "output.pdf")
+
+    with open("sourcedocument", 'r', encoding='utf-8') as file:
+        document_id = str(file.read())
+        generate_markdown_for_document(document_id)
+        convert_markdown_to_pdf()
+
+        if os.path.exists(output_filepath):
+            return FileResponse(
+                path = output_filepath,
+                media_type = "application/json",
+                filename = "output.pdf"
+            )
 
 def main():
     """Run the uvicorn server."""
