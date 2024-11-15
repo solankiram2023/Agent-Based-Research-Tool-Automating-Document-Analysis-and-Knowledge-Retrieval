@@ -57,8 +57,8 @@ async def download_node(state: AgentState, config: RunnableConfig):
             resources_to_download.append(resource)
             
             state["logs"].append({
-                "message": f"Downloading {resource['url']}",
-                "done": False
+                "message"   : f"Downloading {resource['url']}",
+                "done"      : False
             })
 
     # Emit the state to let the UI update
