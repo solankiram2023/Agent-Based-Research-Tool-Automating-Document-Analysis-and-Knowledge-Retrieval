@@ -488,20 +488,36 @@ def vectorDB_driver_func():
             os.remove(json_file_path)
             logger.info(f"Local JSON file removed for document ID {document_id}")
 
+            # Upload all images in the images folder to S3
+            if images_folder_path:
+                for image_file in images_folder_path.iterdir():
+                    if image_file.is_file():
+                        s3_key = f"{document_id}/images/{image_file.name}"
+                        s3_client.upload_file(str(image_file), os.getenv("S3_BUCKET_NAME"), s3_key)
+                        logger.info(f"Image file {image_file} uploaded to S3 at {s3_key}")
+
+            # Upload all tables in the tables folder to S3
+            if tables_folder_path:
+                for table_file in tables_folder_path.iterdir():
+                    if table_file.is_file():
+                        s3_key = f"{document_id}/tables/{table_file.name}"
+                        s3_client.upload_file(str(table_file), os.getenv("S3_BUCKET_NAME"), s3_key)
+                        logger.info(f"Table file {table_file} uploaded to S3 at {s3_key}")
+
     logger.info("All document data stored to JSON and uploaded to S3.")
 
 # DAG configuration
 default_args = {
     'owner'     : 'airflow',
     'start_date': days_ago(1),
-    'retries'   : 1,
+    'retries'   : 1
 }
 
 # Create DAG with tasks
 with DAG(
     dag_id = 'docling_parsing', 
     default_args = default_args, 
-    schedule_interval = '@once'
+    schedule_interval = '@once',
 ) as dag:
     
     download_file_from_S3_task = PythonOperator(

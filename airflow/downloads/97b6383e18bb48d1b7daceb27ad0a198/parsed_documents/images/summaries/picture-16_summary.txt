@@ -1,1 +1,0 @@
-Bar chart comparing active versus index performance from 1989 to 2021. Blue represents active, while light blue indicates index. A dotted orange line marks the 50% threshold.

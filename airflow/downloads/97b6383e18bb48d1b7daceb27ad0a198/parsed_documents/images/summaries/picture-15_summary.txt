@@ -1,1 +1,0 @@
-Bar chart comparing "Active" vs. "Index" funds from 1989 to 2021. The chart shows a decreasing trend in active fund performance relative to index funds over time, with a 50% benchmark line highlighted.

@@ -1,1 +1,0 @@
-Investment category table comparing active and index percentages for US Equity, Global Equity, and Sector Equity from 1999 to 2021. Includes subcategories like Large-Cap Blend, Growth, Value, Mid Cap, Small Cap, and various sectors such as Communications, Consumer Goods, and Healthcare. Shows trends in allocation over time.

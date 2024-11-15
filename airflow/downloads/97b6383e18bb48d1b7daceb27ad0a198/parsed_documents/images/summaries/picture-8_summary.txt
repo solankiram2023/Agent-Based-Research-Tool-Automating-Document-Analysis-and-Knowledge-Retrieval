@@ -1,1 +1,0 @@
-Bar chart comparing Index AUM to Active AUM across categories: US Equity, Sector Equity, Regional Equity, Emerging Markets, Global Equity, Miscellaneous. US Equity has the highest ratio, Miscellaneous the lowest.

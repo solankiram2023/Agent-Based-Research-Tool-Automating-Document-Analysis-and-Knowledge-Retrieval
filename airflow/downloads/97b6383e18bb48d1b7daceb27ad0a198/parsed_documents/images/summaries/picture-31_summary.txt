@@ -1,1 +1,0 @@
-Bar charts comparing asset allocation in active and index funds from 1999 to 2021. Panel A (Active) shows varied distribution across US Equity, Global Equity, Sector Equity, Emerging Markets, Regional Equity, and Miscellaneous. Panel B (Index) consistently dominated by Regional Equity. Key colors are blue, cyan, red, green, dark gray, and orange.

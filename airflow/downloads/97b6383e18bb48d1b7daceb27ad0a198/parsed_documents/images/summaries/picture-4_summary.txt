@@ -1,1 +1,0 @@
-Bar chart showing the growth of assets under management (AUM) from 1989 to 2021, divided into active and index funds. The chart reveals a significant increase over time, with both fund types contributing to the total AUM in billions of dollars.

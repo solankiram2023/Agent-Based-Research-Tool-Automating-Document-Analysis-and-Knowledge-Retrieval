@@ -1,1 +1,0 @@
-Bar chart showing the growth of assets under management (AUM) from 1989 to 2021, divided into active equity and index equity. The vertical axis represents AUM in billions of dollars, with a significant increase in both categories over the years. Index equity shows more growth in recent years compared to active equity.

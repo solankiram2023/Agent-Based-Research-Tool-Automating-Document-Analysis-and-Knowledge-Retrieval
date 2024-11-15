@@ -1,1 +1,0 @@
-Bar chart showing the growth of assets under management (AUM) from 1989 to 2021, divided into "Core Beta" and "Strategic Beta" categories. The AUM increases significantly over time, with notable growth from 2010 onwards.

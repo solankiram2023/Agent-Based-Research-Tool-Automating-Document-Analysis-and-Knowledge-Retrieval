@@ -1,1 +1,0 @@
-Bar chart comparing index AUM to active AUM across five categories: US Large Blend, US Small, US Mid, US Large Value, and US Large Growth. US Large Blend shows the highest ratio, exceeding 3.0, while others are below 1.0.

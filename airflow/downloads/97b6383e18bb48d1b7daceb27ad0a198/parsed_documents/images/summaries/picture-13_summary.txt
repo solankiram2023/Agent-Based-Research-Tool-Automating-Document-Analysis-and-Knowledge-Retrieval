@@ -1,1 +1,0 @@
-Stacked bar chart showing market share distribution from 1989 to 2021 among the United States, Europe, and Rest of World (ROW). The blue section represents the U.S., the light blue section represents Europe, and the red section represents ROW. The chart highlights changes in market dominance over time.

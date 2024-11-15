@@ -1,1 +1,0 @@
-Stacked bar chart showing the percentage of Core Beta and Strategic Beta from 1989 to 2021. Core Beta (dark blue) dominates the chart, with a consistent presence above 90%, while Strategic Beta (light blue) gradually increases, particularly noticeable in the years after 2009. A dotted orange line marks the 50% level.

@@ -1,1 +1,0 @@
-Bar chart showing the percentage distribution of Active Fixed Income and Indexed Fixed Income from 1989 to 2021. Active Fixed Income dominates throughout the years, with Indexed Fixed Income gradually increasing from 2013 onwards. A 50% horizontal line is marked.

@@ -1,1 +1,0 @@
-Bar chart showing the dominance of "Core Beta" over "Strategic Beta" from 1989 to 2021, with "Core Beta" consistently near 100% and "Strategic Beta" appearing slightly post-2011.

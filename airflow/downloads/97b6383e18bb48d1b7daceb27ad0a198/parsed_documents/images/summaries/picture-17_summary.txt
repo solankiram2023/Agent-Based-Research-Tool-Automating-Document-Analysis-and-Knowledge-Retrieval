@@ -1,1 +1,0 @@
-Bar chart comparing "Active" vs "Index" investment performance from 1989 to 2021. The blue section represents "Active" and the light blue section represents "Index." A yellow dashed line marks the 50% level. The chart shows fluctuating percentages with "Active" consistently above 50% after the early 1990s.

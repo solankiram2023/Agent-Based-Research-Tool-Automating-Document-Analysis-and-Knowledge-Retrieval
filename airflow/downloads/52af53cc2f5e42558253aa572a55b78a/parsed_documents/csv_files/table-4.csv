@@ -1,3 +1,0 @@
-,,Actual High Risk  Tolerance,Actual Low Risk Tolerance
-0,High Risk Tolerance Prediction,True positive (TP),False positive (FP)
-1,Low Risk Tolerance Prediction,False negative (FN),True negative (TN)

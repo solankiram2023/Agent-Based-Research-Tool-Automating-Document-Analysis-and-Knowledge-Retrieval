@@ -1,1 +1,0 @@
-This image is a table listing European countries with their respective Active AUM (Assets Under Management) and Index AUM values. Key entries include Luxembourg with the highest Active AUM at 2,018.9 and Ireland with the highest Index AUM at 930.7. The table is divided into two columns for Active and Index AUM for each country.

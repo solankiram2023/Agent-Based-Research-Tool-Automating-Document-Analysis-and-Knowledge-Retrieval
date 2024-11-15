@@ -1,1 +1,0 @@
-Bar chart comparing Index AUM to Active AUM across various sectors: Financials, Industrials, Consumer Goods & Services, Natural Resources, Communications, Energy, Real Estate, Precious Metals, Utilities, Technology, Health Care, and Infrastructure. Financials and Industrials have the highest ratios, while Infrastructure has the lowest.

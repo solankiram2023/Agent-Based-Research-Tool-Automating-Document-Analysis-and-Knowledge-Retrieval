@@ -1,1 +1,0 @@
-Bar chart showing assets under management (AUM) in billions from 1989 to 2021, comparing active and index funds. Active funds are represented in dark blue and index funds in light blue, illustrating growth over time with a significant increase in both categories, particularly after 2009.
