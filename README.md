@@ -47,7 +47,7 @@ The application primarily focuses on:
 
 
 ### 2. Airflow Pipeline
-![Architecture Diagram](airflow_pipeline.png](https://github.com/BigDataIA-Fall2024-TeamB6/Assignment4/blob/diagram/airflow_pipeline.png)
+![Architecture Diagram](https://github.com/BigDataIA-Fall2024-TeamB6/Assignment4/blob/diagram/airflow_pipeline.png)
 
 
 
