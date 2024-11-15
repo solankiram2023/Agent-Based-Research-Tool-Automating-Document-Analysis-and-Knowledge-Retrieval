@@ -21,10 +21,26 @@ def RetrieveFromPinecone(queries: List[str]):
 async def retrieve_node(state: AgentState, config: RunnableConfig):
     """Retrieve relevant documents from Pinecone."""
 
+    config = copilotkit_customize_config(
+        config,
+        emit_intermediate_state=[{
+            "state_key"     : "research_question",
+            "tool"          : "WriteResearchQuestion",
+            "tool_argument" : "research_question",
+        }],
+        emit_tool_calls="WriteResearchQuestion"
+    )
+
     pinecone = Pinecone(api_key = os.getenv("PINECONE_API_KEY"))
 
     # Load Pinecone Index
-    pinecone_index = pinecone.Index("full-text-index")
+    index_name = None
+    
+    if os.path.isfile("sourcedocument"):
+        with open("sourcedocument", 'r', encoding='utf-8') as file:
+            index_name = str(file.read()) + "-doc-index"
+
+    pinecone_index = pinecone.Index(index_name)
 
     ai_message = cast(AIMessage, state["messages"][-1])
     state["resources"] = state.get("resources", [])
@@ -63,7 +79,7 @@ async def retrieve_node(state: AgentState, config: RunnableConfig):
         for match in results["matches"]:
             resources.append({
                 "url"           : match["id"],
-                "title"         : match["metadata"].get("text", "No title")[:20],
+                "title"         : match["metadata"].get("text", "No title")[:50],
                 "description"   : match["metadata"].get("text", "No description"),
                 "vector_resource" : True
             })
@@ -82,7 +98,9 @@ async def retrieve_node(state: AgentState, config: RunnableConfig):
 
     state["messages"].append(ToolMessage(
         tool_call_id = ai_message.tool_calls[0]["id"],
-        content      = f"Added the following resources: {resources}"
+        content      = f"Added relevant chunks from Pinecone: {resources}"
     ))
+
+    state["logs"] = []
 
     return state
