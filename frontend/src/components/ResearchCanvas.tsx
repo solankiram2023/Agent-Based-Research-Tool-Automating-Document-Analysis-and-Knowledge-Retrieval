@@ -154,6 +154,26 @@ export function ResearchCanvas() {
     }
   };
 
+  const handleExportCodelabs = async () => {
+    try {
+      // Send a POST request to trigger the Codelab export on the backend
+      const response = await fetch("http://localhost:8000/exportCodelabs", {
+        method: "POST"
+      });
+  
+      if (response.ok) {
+        console.log("Codelab export successful.");
+  
+        // Open localhost:9000 in a new tab to view the Codelab
+        window.open("http://localhost:9000", "_blank");
+      } else {
+        console.log("Failed to export Codelab");
+      }
+    } catch (error) {
+      console.error("Error exporting Codelab:", error);
+    }
+  };
+
   const documents = [
     { id: "68db7e4f057f494fb5b939ba258cefcd", name: "Revisiting-the-Equity-Risk-Premium" },
     { id: "97b6383e18bb48d1b7daceb27ad0a198", name: "beyond-active-and-passive" },
@@ -291,7 +311,7 @@ export function ResearchCanvas() {
 
           {/* Export to Codelabs */}
           <button
-            onClick={handleExportPDF}
+            onClick={handleExportCodelabs}
             className="px-6 py-2 bg-[#6766FC] text-white rounded text-sm font-bold"
           >
             Export to Codelabs
