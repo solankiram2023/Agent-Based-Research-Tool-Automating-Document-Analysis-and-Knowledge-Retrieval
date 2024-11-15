@@ -27,15 +27,17 @@ Gomathy Selvamuthiah | 002410534 | 33% |
 Ramy Solanki         | 002816593 | 33% | 
 
 ## Problem Statement
-With the rapid growth of publications, it has become increasingly challenging to analyze complex documents, interpret images and graphs, and derive meaningful business insights. This project aims to create a robust solution that allows users to interact with documents through Q&A functionality. By leveraging Retrieval-Augmented Generation (RAG), the application provides relevant responses, images, and graphs specific to user questions, simplifying the analysis process and enabling users to obtain accurate insights efficiently. The application primarily focuses on:
+This project aims to address these challenges by creating an agent-based research tool that leverages Retrieval-Augmented Generation (RAG) and multi-agent systems to enable users to interact seamlessly with document content. By incorporating advanced technologies like Langraph and Pinecone, the application simplifies research processes and empowers users to derive accurate, context-aware insights.
 
-1. Content Extraction and Storage: Scrape content from the CFA Institute Research Foundation website, loading files onto S3 and storing textual data, such as titles and summaries, in a Snowflake database.
-2. Automated Data Ingestion: Automate the data ingestion process with an Airflow pipeline, ensuring efficient and structured data handling.
-3. API Endpoints: Develop multiple API endpoints to support services like document exploration and dropdown selection for document access, RAG interaction with UI.
-4. Real-Time Summary Generation: Generate document summaries on the fly using NVIDIA’s advanced services.
-5. Multi-Modal RAG with Cleanlabs Integration: Implement multi-modal RAG to enhance response relevance and integrate Cleanlabs for response trustworthiness.
-6. Comprehensive Report Generation: Create reports with responses, images, and graphs relevant to user queries for a richer understanding.
-7. Research Notes Validation and Indexing: Validate, store, and incrementally index research notes to facilitate efficient future searches and analysis.
+The application primarily focuses on:
+
+1. Content Parsing and Vector Storage: Parse document contents, including text, tables, images, and graphs, using Docling and store vectorized embeddings in Pinecone for scalable similarity search.
+2. Automated Workflow with Airflow: Automate document parsing, embedding generation, and vector storage through a robust Airflow pipeline.
+3. Multi-Agent System for Research: Enable document exploration, Arxiv-based paper searches, web-based contextual searches, and Q&A functionality using Langraph’s multi-agent capabilities.
+4. Interactive User Interface: Provide a user-friendly interface with Coagents or Streamlit for document selection, querying, and real-time interaction.
+5. Comprehensive Reports: Generate professional reports in PDF and Codelabs formats containing responses, images, and graphs relevant to user queries.
+6. Efficient Workflow Management: Validate and store research notes, enabling incremental indexing and efficient future searches.
+
 
 
 ## Architecture Diagram
