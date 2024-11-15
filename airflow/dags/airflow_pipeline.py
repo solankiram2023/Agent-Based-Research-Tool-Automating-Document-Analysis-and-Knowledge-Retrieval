@@ -54,7 +54,7 @@ def download_files_from_s3(bucket_name, document_id):
 
 
 def download_files_from_s3_driver_func():
-    logger.info(f"Ariflow - download_files_from_s3_driver_func - Driver function to download files from s3")
+    logger.info(f"Airflow - download_files_from_s3_driver_func - Driver function to download files from s3")
     # Load environment variables
     bucket_name = os.getenv("S3_BUCKET_NAME")
     document_ids = ['68db7e4f057f494fb5b939ba258cefcd/', '97b6383e18bb48d1b7daceb27ad0a198/', '52af53cc2f5e42558253aa572a55b78a/']
@@ -62,21 +62,22 @@ def download_files_from_s3_driver_func():
     try:
         for document_id in document_ids:
             download_files_from_s3(bucket_name, document_id)
-        logger.info(f"Ariflow - download_files_from_s3_driver_func - All files downloaded successfully from s3 to local")
+        logger.info(f"Airflow - download_files_from_s3_driver_func - All files downloaded successfully from s3 to local")
     except Exception as e:
-        logger.error(f"Ariflow - download_files_from_s3_driver_func - Error while downloading PDF documents from S3: {e}")
+        logger.error(f"Airflow - download_files_from_s3_driver_func - Error while downloading PDF documents from S3: {e}")
         raise e
 
 from pathlib import Path
 def document_Parser(input_doc_path, output_dir):
-    logger.info(f"Ariflow - document_Parser - Parsing through PDF file using Docling")
+    logger.info(f"Airflow - document_Parser - Parsing through PDF file using Docling")
 
+    import pandas as pd
     from docling.datamodel.base_models import InputFormat
     from docling_core.types.doc import PictureItem, TableItem
     from docling.datamodel.pipeline_options import PdfPipelineOptions
     from docling.document_converter import DocumentConverter, PdfFormatOption
 
-    logger.info(f"Ariflow - document_Parser - Initializing parameters for pipeline_options")
+    logger.info(f"Airflow - document_Parser - Initializing parameters for pipeline_options")
     # Parameters for pipeline
     pipeline_options = PdfPipelineOptions()
     pipeline_options.do_ocr = True
@@ -86,18 +87,18 @@ def document_Parser(input_doc_path, output_dir):
     pipeline_options.generate_table_images = True
     pipeline_options.generate_picture_images = True
 
-    logger.info(f"Ariflow - document_Parser - All parameters set for the pipeline options")
+    logger.info(f"Airflow - document_Parser - All parameters set for the pipeline options")
     # Initializing document converter
     doc_converter = DocumentConverter(
         format_options = {
             InputFormat.PDF: PdfFormatOption(pipeline_options = pipeline_options)
         }
     )
-    logger.info(f"Ariflow - document_Parser - Document converter initialized")
+    logger.info(f"Airflow - document_Parser - Document converter initialized")
 
     # Store the result
     conv_result = doc_converter.convert(input_doc_path)
-    logger.info(f"Ariflow - document_Parser - All contents extracted from PDF file successfully")
+    logger.info(f"Airflow - document_Parser - All contents extracted from PDF file successfully")
     
     # Store results in local directory
     doc_filename = conv_result.input.file.stem
@@ -130,22 +131,22 @@ def document_Parser(input_doc_path, output_dir):
             with image_filename.open("wb") as fp:
                 element.image.pil_image.save(fp, "PNG")
     
-    logger.info(f"Ariflow - document_Parser - All images and tables stored as PNG in images, tables folder")
+    logger.info(f"Airflow - document_Parser - All images and tables stored as PNG in images, tables folder")
 
     for table_ix, table in enumerate(conv_result.document.tables):
         table_df: pd.DataFrame = table.export_to_dataframe()
         csv_filename = Path(os.path.join(csv_files_output_dir, f"table-{table_ix+1}.csv"))
         table_df.to_csv(csv_filename)
 
-    logger.info(f"Ariflow - document_Parser - All tables stored in CSV format in csv_files folder")
+    logger.info(f"Airflow - document_Parser - All tables stored in CSV format in csv_files folder")
     
     with (Path(os.path.join(output_dir, f"{doc_filename}.md"))).open("w", encoding = "utf-8") as fp:
         fp.write(conv_result.document.export_to_markdown())
 
-    logger.info(f"Ariflow - document_Parser - Text from PDF document is stored as markdown file")
+    logger.info(f"Airflow - document_Parser - Text from PDF document is stored as markdown file")
 
 def doc_parser_driver_func():
-    logger.info(f"Ariflow - doc_parser_driver_func - Driver function to parse through every PDF document using Docling")
+    logger.info(f"Airflow - doc_parser_driver_func - Driver function to parse through every PDF document using Docling")
 
     import pandas as pd
     from pathlib import Path
@@ -154,9 +155,9 @@ def doc_parser_driver_func():
     download_dir = Path(os.path.join(os.getcwd(), os.getenv("DOWNLOAD_DIRECTORY")))
 
     # Loop through all subdirectories (document_id folders) in the DOWNLOAD_DIRECTORY
-    logger.info(f"Ariflow - doc_parser_driver_func - Looping through all documents in {download_dir}")
+    logger.info(f"Airflow - doc_parser_driver_func - Looping through all documents in {download_dir}")
     for document_id_dir in download_dir.iterdir():
-        logger.info(f"Ariflow - doc_parser_driver_func - Listing all PDF files in {document_id_dir}")
+        logger.info(f"Airflow - doc_parser_driver_func - Listing all PDF files in {document_id_dir}")
         if document_id_dir.is_dir():
 
             # Initialize fname variable as None
@@ -174,31 +175,31 @@ def doc_parser_driver_func():
                 output_dir = Path(os.path.join(document_id_dir, "parsed_documents"))
                 output_dir.mkdir(parents=True, exist_ok=True)
                 input_dir = Path(os.path.join(document_id_dir, fname))
-                logger.info(f"Ariflow - doc_parser_driver_func - Parsing document from {input_dir} and storing the parsed_document in {output_dir}")
+                logger.info(f"Airflow - doc_parser_driver_func - Parsing document from {input_dir} and storing the parsed_document in {output_dir}")
                 document_Parser(input_dir, output_dir)
                 gc.collect()
             else:
-                logger.info(f"Ariflow - doc_parser_driver_func - No PDF file found in {document_id_dir}")
+                logger.info(f"Airflow - doc_parser_driver_func - No PDF file found in {document_id_dir}")
         else:
-            logger.info(f"Ariflow - doc_parser_driver_func - {document_id_dir} directory does not exist")
+            logger.info(f"Airflow - doc_parser_driver_func - {document_id_dir} directory does not exist")
 
 
 def encode_image_to_base64(image_path):
-    logger.info(f"Ariflow - encode_image_to_base64 - Encoding image to base64")
+    logger.info(f"Airflow - encode_image_to_base64 - Encoding image to base64")
 
     import base64
     
     try:
         with open(image_path, 'rb') as img_file:
             img_base64 = base64.b64encode(img_file.read()).decode('utf-8')
-        logger.info(f"Ariflow - encode_image_to_base64 - Image encoded to base64 successfully")
+        logger.info(f"Airflow - encode_image_to_base64 - Image encoded to base64 successfully")
         return img_base64
     except Exception as e:
-        logger.error(f"Ariflow - encode_image_to_base64 - Error encoding image to base64: {e}")
+        logger.error(f"Airflow - encode_image_to_base64 - Error encoding image to base64: {e}")
         return None
     
 def image_summarize(img_base64, prompt):
-    logger.info(f"Ariflow - image_summarize - Summarizing image with GPT")
+    logger.info(f"Airflow - image_summarize - Summarizing image with GPT")
 
     import os 
     from langchain_openai import ChatOpenAI
@@ -228,16 +229,16 @@ def image_summarize(img_base64, prompt):
                 )
             ]
         )
-        logger.info(f"Ariflow - image_summarize - Summary generated successfully")
+        logger.info(f"Airflow - image_summarize - Summary generated successfully")
         return msg.content
     
     except Exception as e:
-            logger.error(f"Ariflow - image_summarize - Error generating summary with GPT-4o: {e}")
+            logger.error(f"Airflow - image_summarize - Error generating summary with GPT-4o: {e}")
             return None
 
 
 def process_images_and_tables(folder_path, document_id):
-    logger.info(f"Ariflow - process_images_and_tables - Generating summaries for images in {folder_path} for document ID {document_id}")
+    logger.info(f"Airflow - process_images_and_tables - Generating summaries for images in {folder_path} for document ID {document_id}")
     
     from pathlib import Path
 
@@ -254,13 +255,13 @@ def process_images_and_tables(folder_path, document_id):
             image_path = os.path.join(folder_path, image_filename)
 
             if os.path.isfile(image_path):
-                logger.info(f"Ariflow - process_images_and_tables - Processing image {image_filename} for document ID {document_id}")
+                logger.info(f"Airflow - process_images_and_tables - Processing image {image_filename} for document ID {document_id}")
 
                 # Encode image to base64
                 image_base64 = encode_image_to_base64(image_path)
                 if image_base64:
                     image_summary = image_summarize(image_base64, prompt)
-                    logger.info(f"Ariflow - process_images_and_tables - Image {image_filename} summary: {image_summary} for document ID {document_id}")
+                    logger.info(f"Airflow - process_images_and_tables - Image {image_filename} summary: {image_summary} for document ID {document_id}")
                 
                     if image_summary:
                         summaries.append(image_summary)
@@ -275,7 +276,7 @@ def process_images_and_tables(folder_path, document_id):
                         summary_filepath = os.path.join(summary_filedir, summary_filename)
                         with open(summary_filepath, "w") as file:
                             file.write(image_summary)
-                        logger.info(f"Ariflow - process_images_and_tables - Summary generated successfully for {image_filename} for document ID {document_id}")
+                        logger.info(f"Airflow - process_images_and_tables - Summary generated successfully for {image_filename} for document ID {document_id}")
                     else:
                         summaries.append(f"Failed to summarize image: {image_filename}")
                         document_image_summaries.append({
@@ -283,7 +284,7 @@ def process_images_and_tables(folder_path, document_id):
                             'filename': image_filename,
                             'summary': f"Failed to summarize image: {image_filename}"
                         })
-                        logger.warning(f"Ariflow - process_images_and_tables - Failed to summarize image {image_filename} for document ID {document_id}")
+                        logger.warning(f"Airflow - process_images_and_tables - Failed to summarize image {image_filename} for document ID {document_id}")
                 else:
                     summaries.append(f"Failed to encode image: {image_filename}")
                     document_image_summaries.append({
@@ -291,17 +292,17 @@ def process_images_and_tables(folder_path, document_id):
                             'filename': image_filename,
                             'summary': "Failed to encode image"
                         })
-                    logger.warning(f"Ariflow - process_images_and_tables - Failed to encode image {image_filename} for document ID {document_id}")
+                    logger.warning(f"Airflow - process_images_and_tables - Failed to encode image {image_filename} for document ID {document_id}")
 
-        logger.info(f"Ariflow - process_images_and_tables - Summaries generated successfully for images in {folder_path} for document ID {document_id}")
+        logger.info(f"Airflow - process_images_and_tables - Summaries generated successfully for images in {folder_path} for document ID {document_id}")
         return summaries, document_image_summaries
     except Exception as e:
-        logger.error(f"Ariflow - process_images_and_tables - Error processing images in {folder_path} for document ID {document_id}: {e}")
+        logger.error(f"Airflow - process_images_and_tables - Error processing images in {folder_path} for document ID {document_id}: {e}")
         raise e
 
 
 def create_embeddings_in_batches(embedding_model, texts, batch_size = 5):
-    logger.info(f"Ariflow - create_embeddings_in_batches - Creating embeddings")
+    logger.info(f"Airflow - create_embeddings_in_batches - Creating embeddings")
     
     import math
     
@@ -317,12 +318,12 @@ def create_embeddings_in_batches(embedding_model, texts, batch_size = 5):
 
         # Append the embeddings to the list of all embeddings
         all_embeddings.extend(batch_embeddings)
-        logger.info(f"Ariflow - create_embeddings_in_batches - Processed batch {i+1}/{total_batches} with {len(batch_texts)} texts.")
+        logger.info(f"Airflow - create_embeddings_in_batches - Processed batch {i+1}/{total_batches} with {len(batch_texts)} texts.")
 
     return all_embeddings
 
 def save_data_into_VectorDB(markdown_file_path, images_folder_path, tables_folder_path, document_id):
-    logger.info(f"Ariflow - save_data_into_VectorDB - Storing embeddings into vector database")
+    logger.info(f"Airflow - save_data_into_VectorDB - Storing embeddings into vector database")
    
     import uuid
     import time
@@ -335,12 +336,12 @@ def save_data_into_VectorDB(markdown_file_path, images_folder_path, tables_folde
     from langchain_core.documents import Document
 
     # Load data from markdown file using Unstructured
-    logger.info(f"Ariflow - save_data_into_VectorDB - Load data from markdown file using Unstructured")
+    logger.info(f"Airflow - save_data_into_VectorDB - Load data from markdown file using Unstructured")
     loader = UnstructuredMarkdownLoader(markdown_file_path, mode="elements")
     data = loader.load()
 
     # Text splitter for splitting data into chunks
-    logger.info(f"Ariflow - save_data_into_VectorDB - Creating textsplitter for splitting data into chunks")
+    logger.info(f"Airflow - save_data_into_VectorDB - Creating textsplitter for splitting data into chunks")
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=4000,
         chunk_overlap=200
@@ -348,44 +349,42 @@ def save_data_into_VectorDB(markdown_file_path, images_folder_path, tables_folde
 
     chunks = []
     # Process markdown text
-    logger.info(f"Ariflow - save_data_into_VectorDB - Processing markdown text")
+    logger.info(f"Airflow - save_data_into_VectorDB - Processing markdown text")
     for element in data:
         text = element.page_content
         chunks.extend(text_splitter.create_documents([text]))
     
     # Generate summaries for images and tables
-    # image_summaries, images_dict = process_images_and_tables(images_folder_path, document_id)
+    image_summaries, images_dict = process_images_and_tables(images_folder_path, document_id)
     table_summaries, tables_dict = process_images_and_tables(tables_folder_path, document_id)
-    logger.info(f"Ariflow - save_data_into_VectorDB - Generated summaries for images and tables")
+    logger.info(f"Airflow - save_data_into_VectorDB - Generated summaries for images and tables")
 
     # Prepare text data for embedding (extract the actual text from chunks)
-    logger.info(f"Ariflow - save_data_into_VectorDB - Preparing text for embeddings")
-    texts = [chunk.page_content for chunk in chunks] + table_summaries
-    document_dict = tables_dict
+    logger.info(f"Airflow - save_data_into_VectorDB - Preparing text for embeddings")
 
-    # texts = [chunk.page_content for chunk in chunks] + image_summaries + table_summaries
-    # document_dict = images_dict + tables_dict
+    texts = [chunk.page_content for chunk in chunks] + image_summaries + table_summaries
+    document_dict = images_dict + tables_dict
 
     embedding_model = OpenAIEmbeddings(model="text-embedding-3-large", api_key=os.getenv("OPENAI_API_KEY"))
 
     embeddings = create_embeddings_in_batches(embedding_model, texts)
 
     # Print the length of embeddings and the size of the first embedding vector
-    logger.info(f"Ariflow - save_data_into_VectorDB - Total embeddings generated: {len(embeddings)}")
-    logger.info(f"Ariflow - save_data_into_VectorDB - Size of first embedding: {len(embeddings[0])}")
+    logger.info(f"Airflow - save_data_into_VectorDB - Total embeddings generated: {len(embeddings)}")
+    logger.info(f"Airflow - save_data_into_VectorDB - Size of first embedding: {len(embeddings[0])}")
 
     # Initialize Pinecone client
-    logger.info(f"Ariflow - save_data_into_VectorDB - Pinecone client created")
+    logger.info(f"Airflow - save_data_into_VectorDB - Pinecone client created")
     pc = pinecone.Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
     # Pinecone index name
     index_name = f'{document_id}-doc-index'
-    logger.info(f"Ariflow - save_data_into_VectorDB - Pinecone index created {index_name}")
+    logger.info(f"Airflow - save_data_into_VectorDB - Pinecone index created {index_name}")
 
     # Check if the index exists, delete if present, then create a new one
     if index_name in pc.list_indexes().names():
         pc.delete_index(index_name)
-        logger.info(f"Ariflow - save_data_into_VectorDB - Deleting existing index {index_name}")
+        logger.info(f"Airflow - save_data_into_VectorDB - Deleting existing index {index_name}")
 
     # Create a spec for the index
     spec = ServerlessSpec(cloud="aws", region="us-east-1")
@@ -396,7 +395,7 @@ def save_data_into_VectorDB(markdown_file_path, images_folder_path, tables_folde
         metric='cosine',
         spec=spec
     )
-    logger.info(f"Ariflow - save_data_into_VectorDB - Created new index {index_name}")
+    logger.info(f"Airflow - save_data_into_VectorDB - Created new index {index_name}")
 
     # Wait for index to be initialized
     while not pc.describe_index(index_name).status['ready']:
@@ -416,12 +415,12 @@ def save_data_into_VectorDB(markdown_file_path, images_folder_path, tables_folde
     docs = [Document(page_content=texts[i], metadata={"id": ids[i]}) for i in range(len(texts))]
     
     docsearch = PineconeVectorStore.from_documents(docs, embedding_model, index_name=index_name)
-    logger.info(f"Ariflow - save_data_into_VectorDB - Upserted vectors into Pinecone using PineconeVectorStore")
+    logger.info(f"Airflow - save_data_into_VectorDB - Upserted vectors into Pinecone using PineconeVectorStore")
     print(f"Upserted vectors into Pinecone using PineconeVectorStore.")
 
     return document_dict
 def vectorDB_driver_func():
-    logger.info("Ariflow - vectorDB_driver_func - vectorDB driver function")
+    logger.info("Airflow - vectorDB_driver_func - vectorDB driver function")
 
     import json
     from pathlib import Path
@@ -463,9 +462,9 @@ def vectorDB_driver_func():
                         tables_folder_path = file_path
                         print(f"Tables folder found: {tables_folder_path}")
 
-            logger.info(f"Ariflow - vectorDB_driver_func - {markdown_file_path}, {images_folder_path}, {tables_folder_path}")
+            logger.info(f"Airflow - vectorDB_driver_func - {markdown_file_path}, {images_folder_path}, {tables_folder_path}")
             document_dict = save_data_into_VectorDB(markdown_file_path, images_folder_path, tables_folder_path, document_id)
-            logger.info(f"Ariflow - vectorDB_driver_func - Data for document_id {document_id} stored to Pinecone vectorDB successfully")
+            logger.info(f"Airflow - vectorDB_driver_func - Data for document_id {document_id} stored to Pinecone vectorDB successfully")
 
             
             # Load images and tables summaries into JSON file
