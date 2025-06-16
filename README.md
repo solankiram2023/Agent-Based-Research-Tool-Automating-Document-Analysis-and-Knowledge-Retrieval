@@ -17,15 +17,7 @@ Codelabs documentation link: https://codelabs-preview.appspot.com/?file_id=1qFJk
 ## Demo Link
 Demo Link is attached in Codelabs Document
 
-## Attestation and Team Contribution
-**WE ATTEST THAT WE HAVEN’T USED ANY OTHER STUDENTS’ WORK IN OUR ASSIGNMENT AND ABIDE BY THE POLICIES LISTED IN THE STUDENT HANDBOOK**
 
-Name | NUID | Contribution% | Work_Contributed
---- | --- | --- | --- |
-Sandeep Suresh Kumar | 002841297 | 33% | RAG Agent with Langgraph, Coagents, Deployment
-Deepthi Nasika       | 002474582 | 33% | Docling Parsing, Vector Storage, Export to Codelabs
-Gomathy Selvamuthiah | 002410534 | 33% | Airflow Pipeline, Web Search Agent, Export to PDF
-Ramy Solanki         | 002816593 | 33% | Llama Index Agent, Arxiv Agent, Dockerization
 
 ## Problem Statement
 This project aims to address these challenges by creating an agent-based research tool that leverages Retrieval-Augmented Generation (RAG) and multi-agent systems to enable users to interact seamlessly with document content. By incorporating advanced technologies like Langraph and Pinecone, the application simplifies research processes and empowers users to derive accurate, context-aware insights. The application primarily focuses on:
