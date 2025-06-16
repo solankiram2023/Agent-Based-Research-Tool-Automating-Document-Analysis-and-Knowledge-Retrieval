@@ -1,4 +1,4 @@
-# Assignment4
+
 
 ## Agent-Based Research Tool: Automating Document Analysis and Knowledge Retrieval
 An interactive, agent-based research application built using FastAPI, Coagents, and Langraph to analyze and explore publications. The application parses document contents—including text, tables, images, and graphs—using Docling and stores structured data as vector embeddings in Pinecone for scalable similarity search. Users can interactively explore selected documents, query research insights, and retrieve responses leveraging multi-agent capabilities such as Arxiv search, web search, and Retrieval-Augmented Generation (RAG).
